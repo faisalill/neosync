@@ -64,27 +64,27 @@ compose-auth-up:
 	sh -c "docker compose -f $(PROD_AUTH_COMPOSE_FILE) up -d"
 .PHONY: compose-auth-up
 
-compose-auth-down:
+compose-auth-down: rebuild
 	sh -c "docker compose -f $(TEMPORAL_COMPOSE_FILE) down"
 	sh -c "docker compose -f $(PROD_AUTH_COMPOSE_FILE) down"
 .PHONY: compose-auth-down
 	
-compose-dev-up: rebuild 
+compose-dev-up:  
 	sh -c "docker compose -f $(TEMPORAL_COMPOSE_FILE) up -d"
 	sh -c "docker compose -f $(DEV_COMPOSE_FILE) watch"
 .PHONY: compose-dev-up
 
-compose-dev-down: rebuild
+compose-dev-down: 
 	sh -c "docker compose -f $(TEMPORAL_COMPOSE_FILE) down"
 	sh -c "docker compose -f $(DEV_COMPOSE_FILE) down"
 .PHONY: compose-dev-down
 
-compose-dev-auth-up: rebuild 
+compose-dev-auth-up:  
 	sh -c "docker compose -f $(TEMPORAL_COMPOSE_FILE) up -d"
 	sh -c "docker compose -f $(DEV_AUTH_COMPOSE_FILE) watch"
 .PHONY: compose-dev-auth-up
 
-compose-dev-auth-down: rebuild
+compose-dev-auth-down: 
 	sh -c "docker compose -f $(TEMPORAL_COMPOSE_FILE) down"
 	sh -c "docker compose -f $(DEV_AUTH_COMPOSE_FILE) down"
 .PHONY: compose-dev-auth-down
